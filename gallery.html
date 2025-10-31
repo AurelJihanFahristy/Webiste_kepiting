@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery Produk - Kepiting Segar</title>
+
+  <!-- Bootstrap & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <span class="logo-icon">⚓</span>
+        <span class="logo-text">Kepiting Segar</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="beranda.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+        <a class="btn btn-ws" href="https://wa.me/6281234567890" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== GALLERY SECTION ===== -->
+  <section class="gallery-section py-5 mt-5">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-2">Gallery Kepiting Premium</h2>
+      <p class="text-center text-muted mb-4">Koleksi lengkap kepiting segar berkualitas tinggi</p>
+
+      <div class="text-center mb-5">
+        <button class="btn btn-danger me-2">Semua Produk</button>
+        <button class="btn btn-outline-secondary me-2">Kepiting Bakau</button>
+        <button class="btn btn-outline-secondary me-2">Rajungan</button>
+        <button class="btn btn-outline-secondary">Kepiting Soka</button>
+      </div>
+
+      <div class="row g-4 justify-content-center">
+
+        <div class="col-md-4 col-sm-6">
+          <div class="card product-card shadow-sm">
+            <img src="assets/img/kepiting-bakau.jpg" class="card-img-top" alt="Kepiting Bakau Jumbo">
+            <div class="card-body text-center">
+              <h5 class="fw-bold">Kepiting Bakau Jumbo</h5>
+
+              <button class="btn btn-outline-danger" onclick="pesanProduk('Kepiting Bakau Jumbo', 85000)">
+                <i class="fa-brands fa-whatsapp"></i> Pesan via WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+          <div class="card product-card shadow-sm">
+            <img src="assets/img/kepiting-rajungan.jpg" class="card-img-top" alt="Rajungan Segar">
+            <div class="card-body text-center">
+              <h5 class="fw-bold">Rajungan Segar</h5>>
+              <button class="btn btn-outline-danger" onclick="pesanProduk('Rajungan Segar', 65000)">
+                <i class="fa-brands fa-whatsapp"></i> Pesan via WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-6">
+          <div class="card product-card shadow-sm">
+            <img src="assets/img/kepiting-soka.jpg" class="card-img-top" alt="Kepiting Soka Premium">
+            <div class="card-body text-center">
+              <h5 class="fw-bold">Kepiting Soka Premium</h5>
+              <button class="btn btn-outline-danger" onclick="pesanProduk('Kepiting Soka Premium', 95000)">
+                <i class="fa-brands fa-whatsapp"></i> Pesan via WhatsApp
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="beranda.html" class="btn btn-dark">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row gy-4">
+
+        <!-- Kolom 1: Logo & Deskripsi -->
+        <div class="col-md-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="logo-footer bg-danger rounded-circle text-center me-3">
+              <i class="fa-solid fa-anchor fa-lg text-white"></i>
+            </div>
+            <h4 class="fw-bold">Kepiting Segar</h4>
+          </div>
+          <p class="text-light small">
+            Supplier kepiting segar terpercaya dengan kualitas premium.
+            Melayani kebutuhan restoran, hotel, dan konsumen rumahan di seluruh Indonesia.
+          </p>
+
+          <div class="social-icons d-flex gap-3 mt-3">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+         <!-- Kolom 2: Quick Links -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a href="beranda.html">Dashboard</a></li>
+            <li><a href="gallery.html">Gallery Produk</a></li>
+            <li><a href="profile.html">Profile Perusahaan</a></li>
+            <li><a href="contact.html">Hubungi Kami</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 3: Kontak -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Kontak Kami</h5>
+          <ul class="list-unstyled footer-contact">
+            <li><i class="fa-solid fa-location-dot me-2 text-danger"></i>Jl. Pelabuhan Raya No. 45<br>Muara Baru,
+              Jakarta Utara 14440</li>
+            <li class="mt-2"><i class="fa-brands fa-whatsapp me-2 text-success"></i>+62 812-3456-7890</li>
+            <li class="mt-2"><i class="fa-regular fa-envelope me-2 text-danger"></i>info@kepitingsegar.co.id</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="my-4 text-secondary">
+
+      <div class="text-center">
+        <p class="small mb-0">© 2025 CV. Kepiting Segar Nusantara. All rights reserved.</p>
+      </div>
+    </div>
+    </div>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap & JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Perusahaan - Kepiting Segar</title>
+
+  <!-- Bootstrap & Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <span class="logo-icon">⚓</span>
+        <span class="logo-text">Kepiting Segar</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="beranda.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+          <li class="nav-item"><a class="nav-link active" href="profile.html">Profile</a></li>
+        </ul>
+        <a class="btn btn-ws" href="https://wa.me/6281234567890" target="_blank">
+          <i class="fa-brands fa-whatsapp"></i> Hubungi Kami
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PROFILE SECTION ===== -->
+  <section class="profile-section py-5 mt-5">
+    <div class="container">
+      <h2 class="fw-bold text-center mb-2">Profile Perusahaan</h2>
+      <p class="text-center text-muted mb-5">Mengenal lebih dekat dengan kami</p>
+
+      <div class="row align-items-center g-4">
+        <div class="col-md-6">
+          <div class="p-4 bg-danger text-white rounded-4 shadow">
+            <h4 class="fw-bold">CV. Kepiting Segar Nusantara</h4>
+            <p>Berdiri sejak tahun 2009, kami telah menjadi supplier kepiting segar terpercaya di Indonesia. Dengan pengalaman lebih dari 15 tahun, kami berkomitmen menyediakan kepiting berkualitas premium langsung dari tambak terbaik di seluruh Nusantara.</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 text-center">
+          <img src="assets/img/factory.jpg" class="img-fluid rounded-4 shadow" alt="Fasilitas Kepiting Segar">
+          <h5 class="fw-bold mt-3">Fasilitas Modern</h5>
+          <p class="text-muted">Dilengkapi dengan fasilitas pengolahan dan penyimpanan berstandar internasional untuk menjaga kesegaran produk kami.</p>
+        </div>
+      </div>
+
+      <div class="row mt-5">
+        <div class="col-md-6">
+          <ul class="list-unstyled fs-6">
+            <li><i class="fa-solid fa-location-dot text-danger me-2"></i><strong>Alamat:</strong> Jl. Pelabuhan Raya No. 45, Muara Baru, Jakarta Utara</li>
+            <li><i class="fa-brands fa-whatsapp text-success me-2"></i><strong>WhatsApp:</strong> +62 812-3456-7890</li>
+            <li><i class="fa-regular fa-envelope text-danger me-2"></i><strong>Email:</strong> info@kepitingsegar.co.id</li>
+            <li><i class="fa-regular fa-clock text-warning me-2"></i><strong>Jam Operasional:</strong> Senin–Sabtu 06:00–18:00 WIB</li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 text-center">
+          <div class="card shadow-sm p-3 rounded-4">
+            <img src="assets/img/founder.jpg" class="img-fluid rounded-3" alt="CEO">
+            <h6 class="fw-bold mt-3">Bapak Ahmad Suryadi</h6>
+            <p class="text-muted">Founder & CEO CV. Kepiting Segar Nusantara</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="beranda.html" class="btn btn-dark">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Dashboard
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer text-white pt-5 pb-3">
+    <div class="container">
+      <div class="row gy-4">
+
+        <!-- Kolom 1: Logo & Deskripsi -->
+        <div class="col-md-4">
+          <div class="d-flex align-items-center mb-3">
+            <div class="logo-footer bg-danger rounded-circle text-center me-3">
+              <i class="fa-solid fa-anchor fa-lg text-white"></i>
+            </div>
+            <h4 class="fw-bold">Kepiting Segar</h4>
+          </div>
+          <p class="text-light small">
+            Supplier kepiting segar terpercaya dengan kualitas premium.
+            Melayani kebutuhan restoran, hotel, dan konsumen rumahan di seluruh Indonesia.
+          </p>
+
+          <div class="social-icons d-flex gap-3 mt-3">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+         <!-- Kolom 2: Quick Links -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Quick Links</h5>
+          <ul class="list-unstyled footer-links">
+            <li><a href="beranda.html">Dashboard</a></li>
+            <li><a href="gallery.html">Gallery Produk</a></li>
+            <li><a href="profile.html">Profile Perusahaan</a></li>
+            <li><a href="contact.html">Hubungi Kami</a></li>
+          </ul>
+        </div>
+
+        <!-- Kolom 3: Kontak -->
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3">Kontak Kami</h5>
+          <ul class="list-unstyled footer-contact">
+            <li><i class="fa-solid fa-location-dot me-2 text-danger"></i>Jl. Pelabuhan Raya No. 45<br>Muara Baru,
+              Jakarta Utara 14440</li>
+            <li class="mt-2"><i class="fa-brands fa-whatsapp me-2 text-success"></i>+62 812-3456-7890</li>
+            <li class="mt-2"><i class="fa-regular fa-envelope me-2 text-danger"></i>info@kepitingsegar.co.id</li>
+          </ul>
+        </div>
+
+      </div>
+
+      <hr class="my-4 text-secondary">
+
+      <div class="text-center">
+        <p class="small mb-0">© 2025 CV. Kepiting Segar Nusantara. All rights reserved.</p>
+      </div>
+    </div>
+    </div>
+    </div>
+  </footer>
+
+
+  <!-- Bootstrap & JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
