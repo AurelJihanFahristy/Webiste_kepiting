@@ -1,6 +1,6 @@
 /* ================================
    File: beranda.js
-   Versi: 2.0 (diperbarui)
+   Versi: 2.1 (dengan Popup Produk)
    ================================ */
 
 // === Smooth Scroll untuk link anchor ===
@@ -69,5 +69,68 @@ backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// === Popup Produk ===
+const popup = document.getElementById("popupModal");
+const modalImg = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const closeBtn = document.querySelector(".close-btn");
+
+// Data produk
+const products = {
+  flowers: {
+    title: "Flowers",
+    img: "bakau.jpg",
+    desc: "Kepiting bakau segar dengan daging tebal dan rasa manis alami. Cocok untuk sajian seafood premium dengan kualitas ekspor."
+  },
+  bimbo: {
+    title: "Bimbo",
+    img: "bakau.jpg",
+    desc: "Rajungan segar dengan tekstur lembut dan cita rasa khas laut. Dagingnya manis, lembut, dan cocok untuk berbagai olahan seafood."
+  },
+  capit: {
+    title: "Capit",
+    img: "bakau.jpg",
+    desc: "Menawarkan potongan daging tebal, kenyal, dan gurih yang menjadi favorit pecinta seafood sejati. Setiap gigitan menghadirkan kombinasi sempurna antara kelembutan dan rasa manis alami."
+  }
+};
+
+// Event click untuk tombol detail
+document.querySelectorAll('.btn-detail').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.preventDefault();
+    const key = btn.dataset.produk;
+    const p = products[key];
+    if (p) {
+      modalImg.src = p.img;
+      modalTitle.textContent = p.title;
+      modalDesc.textContent = p.desc;
+      popup.style.display = "flex";
+    }
+  });
+});
+
+// Tutup popup
+closeBtn.addEventListener('click', () => popup.style.display = "none");
+window.addEventListener('click', e => {
+  if (e.target === popup) popup.style.display = "none";
+});
+
+
+// === Fungsi Buka Modal ===
+window.showPopup = function (key) {
+  const p = products[key];
+  modalImg.src = p.img;
+  modalTitle.textContent = p.title;
+  modalDesc.textContent = p.desc;
+  popup.style.display = "flex";
+};
+
+// === Tutup Modal ===
+closeBtn.addEventListener('click', () => popup.style.display = "none");
+window.addEventListener('click', (e) => {
+  if (e.target === popup) popup.style.display = "none";
+});
+
 // === Log Aktivasi File ===
-console.log('%c✅ beranda.js berhasil dimuat dan berjalan lancar', 'color: green; font-weight: bold;');
+console.log('%c✅ beranda.js (v2.1) berhasil dimuat dan popup aktif', 'color: green; font-weight: bold;');
