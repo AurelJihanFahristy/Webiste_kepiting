@@ -4,10 +4,10 @@
 
       <div class="col-md-4">
         <div class="d-flex align-items-center mb-3">
-          <div class="logo-footer bg-danger rounded-circle me-3" style="width: 60px; height: 60px; overflow: hidden; display: flex; justify-content: center; align-items: center;">
-            <img src="FOTO.JPG" alt="Logo Perusahaan" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: cover;">
+          <div class="logo-footer bg-white rounded-circle me-3 p-2">
+            <img src="FOTO.JPG" alt="Logo Perusahaan" class="img-fluid">
           </div>
-          <h4 class="fw-bold"><?php echo htmlspecialchars($profil['nama_cv']); ?></h4>
+          <h4 class="fw-bold mb-0"><?php echo htmlspecialchars($profil['nama_cv']); ?></h4>
         </div>
         <p class="text-light small">
           <?php echo htmlspecialchars($profil['deskripsi_singkat']); ?>
@@ -33,7 +33,7 @@
         <h5 class="fw-bold mb-3">Kontak Kami</h5>
         <ul class="list-unstyled footer-contact">
           <li><i class="fa-solid fa-location-dot me-2 text-danger"></i>
-            <?php echo nl2br(htmlspecialchars($profil['alamat'])); // nl2br untuk ganti baris baru jika ada ?>
+            <?php echo nl2br(htmlspecialchars($profil['alamat'])); ?>
           </li>
           <li class="mt-2"><i class="fa-brands fa-whatsapp me-2 text-success"></i><?php echo htmlspecialchars($profil['whatsapp']); ?></li>
           <li class="mt-2"><i class="fa-regular fa-envelope me-2 text-danger"></i><?php echo htmlspecialchars($profil['email']); ?></li>
