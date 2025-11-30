@@ -32,9 +32,11 @@ if (!isset($active_page)) {
   <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
     <div class="container-fluid px-4">
       <a class="navbar-brand d-flex align-items-center" href="beranda.php">
-        <span class="logo-icon">⚓</span>
-        <span class="logo-text">Kepiting Segar</span>
-      </a>
+    <span class="logo-icon me-2" style="width: 50px; height: 50px; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+        <img src="FOTO.JPG" alt="Logo Kepiting Segar" class="img-fluid" style="max-height: 100%; max-width: 100%; object-fit: cover; border-radius: 50%;">
+    </span>
+    <span class="logo-text">Kepiting Segar</span>
+</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
         <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
       </button>

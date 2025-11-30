@@ -16,6 +16,11 @@ $stats = mysqli_fetch_assoc($result_stats);
 $result_produk = mysqli_query($koneksi, "SELECT * FROM produk WHERE is_unggulan = 1 LIMIT 3");
 ?>
 
+  <!-- Loading Overlay Simple -->
+  <div class="loading-overlay">
+    <div class="loading-spinner"></div>
+  </div>
+
   <header class="hero">
     <div class="bg"></div>
     <div class="hero-container text-white">
@@ -48,6 +53,11 @@ $result_produk = mysqli_query($koneksi, "SELECT * FROM produk WHERE is_unggulan 
                     $badge_class = 'bg-success';
                     $badge_text = 'Spesial';
                 }
+
+                // Potong deskripsi untuk tampilan card (hanya 100 karakter)
+                $deskripsi_pendek = strlen($produk['deskripsi']) > 100 
+                    ? substr($produk['deskripsi'], 0, 100) . '...' 
+                    : $produk['deskripsi'];
         ?>
 
         <div class="col-md-4">
@@ -58,11 +68,11 @@ $result_produk = mysqli_query($koneksi, "SELECT * FROM produk WHERE is_unggulan 
             
             <div class="card-body text-start">
               <h5 class="fw-bold"><?php echo htmlspecialchars($produk['nama_produk']); ?></h5>
-              <p class="text-muted small"><?php echo htmlspecialchars($produk['deskripsi']); ?></p>
+              <p class="text-muted small card-desc"><?php echo htmlspecialchars($deskripsi_pendek); ?></p>
               
               <a href="#" class="btn btn-detail"
                 data-title="<?php echo htmlspecialchars($produk['nama_produk']); ?>"
-                data-desc="<?php echo htmlspecialchars(str_replace(["\r", "\n"], ' ', $produk['deskripsi'])); ?>"
+                data-desc="<?php echo htmlspecialchars($produk['deskripsi']); ?>"
                 data-img="admin/uploads/<?php echo htmlspecialchars($produk['gambar']); ?>">
                 <i class="fa-regular fa-eye"></i> Lihat Detail
               </a>
@@ -129,18 +139,333 @@ $result_produk = mysqli_query($koneksi, "SELECT * FROM produk WHERE is_unggulan 
     </div>
   </section>
 
+  <!-- Modal untuk Detail Produk - DIUBAH -->
   <div id="popupModal" class="modal">
     <div class="modal-content">
       <span class="close-btn">&times;</span>
       <div class="modal-body">
-        <img id="modalImage" src="" alt="Kepiting">
+        <div class="modal-image-container">
+          <img id="modalImage" src="" alt="Kepiting" class="modal-img">
+        </div>
         <div class="modal-text">
-          <h2 id="modalTitle"></h2>
-          <p id="modalDesc"></p>
+          <h2 id="modalTitle" class="modal-title"></h2>
+          <div class="modal-desc-container">
+            <p id="modalDesc" class="modal-desc"></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- CSS untuk Loading Spinner dan Modal - DIUBAH -->
+  <style>
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.98);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .loading-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #f3f3f3;
+      border-top: 3px solid #dc3545;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Modal Styles - DIUBAH */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 2% auto;
+      padding: 0;
+      border-radius: 15px;
+      width: 95%;
+      max-width: 900px;
+      max-height: 95vh;
+      overflow: hidden;
+      position: relative;
+      animation: slideUp 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .close-btn {
+      position: absolute;
+      right: 20px;
+      top: 15px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      z-index: 1001;
+      background: rgba(255,255,255,0.9);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: #dc3545;
+      color: white;
+      transform: rotate(90deg);
+    }
+
+    .modal-body {
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      max-height: 80vh;
+    }
+
+    .modal-image-container {
+      flex: 1;
+      min-height: 400px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      max-height: 400px;
+    }
+
+    .modal-text {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-title {
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #dc3545;
+      padding-bottom: 10px;
+    }
+
+    .modal-desc-container {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 15px;
+      max-height: none;
+    }
+
+    .modal-desc {
+      color: #666;
+      line-height: 1.8;
+      font-size: 1.1rem;
+      text-align: left;
+      white-space: pre-line;
+      word-wrap: break-word;
+    }
+
+    /* Scrollbar styling untuk modal */
+    .modal-desc-container::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal-desc-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .modal-desc-container::-webkit-scrollbar-thumb {
+      background: #dc3545;
+      border-radius: 10px;
+    }
+
+    .modal-desc-container::-webkit-scrollbar-thumb:hover {
+      background: #c82333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Card description styling */
+    .card-desc {
+      height: 60px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    /* Responsive design untuk modal */
+    @media (max-width: 768px) {
+      .modal-body {
+        flex-direction: column;
+        max-height: 90vh;
+      }
+      
+      .modal-image-container {
+        min-height: 250px;
+        max-height: 250px;
+      }
+      
+      .modal-img {
+        max-height: 250px;
+      }
+      
+      .modal-text {
+        padding: 20px;
+        max-height: calc(90vh - 250px);
+      }
+      
+      .modal-title {
+        font-size: 1.5rem;
+      }
+      
+      .modal-desc {
+        font-size: 1rem;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 2% auto;
+        max-height: 95vh;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .modal-content {
+        width: 98%;
+        margin: 1% auto;
+      }
+      
+      .modal-text {
+        padding: 15px;
+      }
+      
+      .modal-title {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+
+  <!-- JavaScript untuk Loading dan Modal - DIUBAH -->
+  <script>
+    // Loading functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const loadingOverlay = document.querySelector('.loading-overlay');
+      
+      // Loading hanya 0.3 detik
+      setTimeout(() => {
+        loadingOverlay.classList.add('fade-out');
+        
+        // Hapus element setelah animasi selesai
+        setTimeout(() => {
+          loadingOverlay.remove();
+        }, 200);
+      }, 400);
+
+      // Modal functionality
+      const modal = document.getElementById('popupModal');
+      const closeBtn = document.querySelector('.close-btn');
+      const detailButtons = document.querySelectorAll('.btn-detail');
+
+      // Open modal when detail button is clicked
+      detailButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          const title = this.getAttribute('data-title');
+          const desc = this.getAttribute('data-desc');
+          const img = this.getAttribute('data-img');
+
+          document.getElementById('modalTitle').textContent = title;
+          document.getElementById('modalDesc').textContent = desc;
+          document.getElementById('modalImage').src = img;
+          document.getElementById('modalImage').alt = title;
+
+          modal.style.display = 'block';
+          document.body.style.overflow = 'hidden';
+          
+          // Reset scroll position di modal
+          const descContainer = document.querySelector('.modal-desc-container');
+          if (descContainer) {
+            descContainer.scrollTop = 0;
+          }
+        });
+      });
+
+      // Close modal when X is clicked
+      closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+
+      // Close modal with ESC key
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal.style.display === 'block') {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
+      });
+    });
+  </script>
 
 <?php 
 // Panggil footer

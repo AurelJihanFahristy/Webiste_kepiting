@@ -69,51 +69,43 @@ backToTop.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// === Popup Produk ===
+// === Popup Produk (Versi Dinamis dari Database) ===
 const popup = document.getElementById("popupModal");
 const modalImg = document.getElementById("modalImage");
 const modalTitle = document.getElementById("modalTitle");
 const modalDesc = document.getElementById("modalDesc");
 const closeBtn = document.querySelector(".close-btn");
 
-// Data produk
-const products = {
-  flowers: {
-    title: "Flowers",
-    img: "bakau.jpg",
-    desc: "Kepiting bakau segar dengan daging tebal dan rasa manis alami. Cocok untuk sajian seafood premium dengan kualitas ekspor."
-  },
-  bimbo: {
-    title: "Bimbo",
-    img: "bakau.jpg",
-    desc: "Rajungan segar dengan tekstur lembut dan cita rasa khas laut. Dagingnya manis, lembut, dan cocok untuk berbagai olahan seafood."
-  },
-  capit: {
-    title: "Capit",
-    img: "bakau.jpg",
-    desc: "Menawarkan potongan daging tebal, kenyal, dan gurih yang menjadi favorit pecinta seafood sejati. Setiap gigitan menghadirkan kombinasi sempurna antara kelembutan dan rasa manis alami."
-  }
-};
-
-// Event click untuk tombol detail
+// Event click untuk semua tombol .btn-detail
 document.querySelectorAll('.btn-detail').forEach(btn => {
   btn.addEventListener('click', e => {
     e.preventDefault();
-    const key = btn.dataset.produk;
-    const p = products[key];
-    if (p) {
-      modalImg.src = p.img;
-      modalTitle.textContent = p.title;
-      modalDesc.textContent = p.desc;
-      popup.style.display = "flex";
+    
+    // Ambil data langsung dari atribut data-* tombol yang diklik
+    const title = btn.dataset.title;
+    const desc = btn.dataset.desc;
+    const img = btn.dataset.img;
+
+    // Masukkan data ke dalam modal
+    if (title && desc && img) {
+        modalImg.src = img;
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+        
+        // Tampilkan modal
+        popup.style.display = "flex";
+    } else {
+        console.error("Data produk tidak lengkap pada tombol.");
     }
   });
 });
 
 // Tutup popup
-closeBtn.addEventListener('click', () => popup.style.display = "none");
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => popup.style.display = "none");
+}
 window.addEventListener('click', e => {
-  if (e.target === popup) popup.style.display = "none";
+    if (e.target === popup) popup.style.display = "none";
 });
 
 
