@@ -3,6 +3,33 @@
 $active_page = 'profile';
 $page_title = 'Profile Perusahaan - Kepiting Segar';
 
+// === TAMBAHKAN KODE INI SEBELUM INCLUDE HEADER ===
+// KONEKSI KE DATABASE
+include 'admin/koneksi.php'; // Pastikan path ini sesuai dengan struktur folder Anda
+
+// AMBIL DATA PROFIL DARI DATABASE
+$query = "SELECT * FROM profil_perusahaan WHERE id = 1";
+$result = mysqli_query($koneksi, $query);
+
+if (mysqli_num_rows($result) > 0) {
+    $profil = mysqli_fetch_assoc($result);
+} else {
+    // Jika data tidak ditemukan, buat array default
+    $profil = [
+        'nama_cv' => 'CV. Pan Putra Kepri',
+        'deskripsi_singkat' => 'Supplier kepiting rajungan terpercaya dengan kualitas premium.',
+        'alamat' => 'Jl. Sungai Ladi RT 001/RW 003, Kel. Kp. Bugis, Kecamatan Tanjungpinang Kota',
+        'whatsapp' => '088888888888',
+        'email' => 'kepitingsegar@gmail.com',
+        'jam_operasional' => 'Senin-Sabtu 08:00-16:00 WIB',
+        'deskripsi_sejarah' => 'Berdiri sejak tahun 2009, kami telah menjadi supplier kepiting segar terpercaya di Indonesia...',
+        'nama_ceo' => 'Nama CEO',
+        'foto_ceo' => 'default_ceo.jpg',
+        'foto_fasilitas' => 'default_fasilitas.jpg'
+    ];
+}
+// === AKHIR TAMBAHAN ===
+
 // Panggil header
 include '_header.php';
 ?>
@@ -28,11 +55,18 @@ include '_header.php';
           <div class="card-body p-4" style="background: linear-gradient(135deg, var(--primary), #9b1c1c); color: white; border-radius: 18px;">
             <div class="d-flex align-items-center mb-3">
               <i class="fa-solid fa-building-columns fs-3 me-3"></i>
-              <h4 class="fw-bold mb-0"><?php echo htmlspecialchars($profil['nama_cv']); ?></h4>
+              <h4 class="fw-bold mb-0"><?php echo htmlspecialchars($profil['nama_cv'] ?? 'CV. Pan Putra Kepri'); ?></h4>
             </div>
             <br>
             <p class="mb-0" style="line-height: 1.8;">
-              Berdiri sejak tahun 2009, kami telah menjadi supplier kepiting segar terpercaya di Indonesia. Dengan pengalaman lebih dari 15 tahun, kami berkomitmen menyediakan kepiting berkualitas premium langsung dari tambak terbaik di seluruh Nusantara.
+              <?php 
+              // Gunakan deskripsi sejarah jika ada, jika tidak gunakan default
+              if (!empty($profil['deskripsi_sejarah'])) {
+                  echo htmlspecialchars($profil['deskripsi_sejarah']);
+              } else {
+              
+              }
+              ?>
             </p>
           </div>
         </div>
@@ -42,9 +76,10 @@ include '_header.php';
       <div class="col-lg-6">
         <div class="card h-100 border-0 shadow-sm overflow-hidden">
           <img
-            src="admin/uploads/<?php echo htmlspecialchars($profil['foto_fasilitas']); ?>"
+            src="admin/uploads/<?php echo htmlspecialchars($profil['foto_fasilitas'] ?? 'default_fasilitas.jpg'); ?>"
             class="profile-img-facility"
-            alt="Fasilitas">
+            alt="Fasilitas"
+            onerror="this.src='admin/uploads/default_fasilitas.jpg'">
           <div class="card-body text-center p-4">
             <h5 class="fw-bold text-danger mb-2">
               <i class="fa-solid fa-warehouse me-2"></i>Fasilitas Modern
@@ -71,28 +106,28 @@ include '_header.php';
                 <i class="fa-solid fa-location-dot text-danger"></i>
                 <div>
                   <strong>Alamat</strong>
-                  <span><?php echo htmlspecialchars($profil['alamat']); ?></span>
+                  <span><?php echo htmlspecialchars($profil['alamat'] ?? 'Jl. Sungai Ladi RT 001/RW 003, Kel. Kp. Bugis'); ?></span>
                 </div>
               </li>
               <li>
                 <i class="fa-brands fa-whatsapp text-success"></i>
                 <div>
                   <strong>WhatsApp</strong>
-                  <span><?php echo htmlspecialchars($profil['whatsapp']); ?></span>
+                  <span><?php echo htmlspecialchars($profil['whatsapp'] ?? '088888888888'); ?></span>
                 </div>
               </li>
               <li>
                 <i class="fa-regular fa-envelope text-danger"></i>
                 <div>
                   <strong>Email</strong>
-                  <span><?php echo htmlspecialchars($profil['email']); ?></span>
+                  <span><?php echo htmlspecialchars($profil['email'] ?? 'kepitingsegar@gmail.com'); ?></span>
                 </div>
               </li>
               <li>
                 <i class="fa-regular fa-clock text-warning"></i>
                 <div>
                   <strong>Jam Operasional</strong>
-                  <span><?php echo htmlspecialchars($profil['jam_operasional']); ?></span>
+                  <span><?php echo htmlspecialchars($profil['jam_operasional'] ?? 'Senin-Sabtu 08:00-16:00 WIB'); ?></span>
                 </div>
               </li>
             </ul>
@@ -109,23 +144,17 @@ include '_header.php';
             </h5>
             <div class="profile-ceo-wrapper mb-3">
               <img
-                src="admin/uploads/<?php echo htmlspecialchars($profil['foto_ceo']); ?>"
+                src="admin/uploads/<?php echo htmlspecialchars($profil['foto_ceo'] ?? 'default_ceo.jpg'); ?>"
                 class="profile-img-ceo"
-                alt="CEO">
+                alt="CEO"
+                onerror="this.src='admin/uploads/default_ceo.jpg'">
             </div>
-            <h5 class="fw-bold mb-1 text-dark"><?php echo htmlspecialchars($profil['nama_ceo']); ?></h5>
+            <h5 class="fw-bold mb-1 text-dark"><?php echo htmlspecialchars($profil['nama_ceo'] ?? 'Nama CEO'); ?></h5>
             <p class="text-muted mb-1 fw-semibold">Founder & CEO</p>
-            <p class="text-muted small mb-0"><?php echo htmlspecialchars($profil['nama_cv']); ?></p>
+            <p class="text-muted small mb-0"><?php echo htmlspecialchars($profil['nama_cv'] ?? 'CV. Pan Putra Kepri'); ?></p>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- TOMBOL KEMBALI -->
-    <div class="text-center mt-5 pt-4">
-      <a href="beranda.php" class="btn btn-outline-dark px-4">
-        <i class="fa-solid fa-arrow-left me-2"></i> Kembali ke Dashboard
-      </a>
     </div>
   </div>
 </section>
